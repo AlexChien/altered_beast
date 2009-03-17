@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   map.resources :sites, :moderatorships
+  map.open_id_complete 'session', :controller => "sessions", :action => "create", :requirements => { :method => :get }
 
   map.resources :forums, :has_many => :posts do |forum|
     forum.resources :topics do |topic|

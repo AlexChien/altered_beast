@@ -42,6 +42,18 @@ class User < ActiveRecord::Base
     !!(admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
   end
 
+  def openid_url=(value)
+    write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_url(value)
+  end
+
+  def to_xml(options = {})
+    options[:except] ||= []
+    options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :admin
+    super
+  end
+
+  
+  
   def display_name
     n = read_attribute(:display_name)
     n.blank? ? login : n

@@ -12,5 +12,14 @@
 <p><label for="password_confirmation">Confirm Password</label><br/>
 <%= f.password_field :password_confirmation %></p>
 
+
+<p>
+  <p class="help">
+    <%= 'Enter your OpenID Identity Url if you know it.'[:open_id_field_extended] %>
+  </p>
+  <label for="user_openid_url"><%= 'Identity Url'[:openid_url_title] %></label><br />
+  <%= f.text_field :openid_url %>
+</p>
+
 <p><%= submit_tag 'Sign up' %></p>
 <% end -%>

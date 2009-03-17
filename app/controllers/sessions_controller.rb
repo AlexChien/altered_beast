@@ -18,7 +18,15 @@ class SessionsController < ApplicationController
       redirect_back_or_default('/')
       flash[:notice] = "Logged in successfully"
     else
-      render :action => 'new'
+      if using_open_id?
+        cookies[:use_open_id] = {:value => '1', :expires => 1.year.from_now.utc}
+        open_id_authentication
+      else
+        cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
+        password_authentication params[:login], params[:password]
+      end
+
+      #render :action => 'new'
     end
   end
 
@@ -29,4 +37,30 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')
   end
+
+  protected
+  
+        def password_authentication(name, password)
+        if @current_user = @account.users.authenticate(params[:name], params[:password])
+          successful_login
+        else
+          failed_login "Sorry, that username/password doesn't work"
+        end
+      end
+
+    def open_id_authentication
+      authenticate_with_open_id params[:openid_url] do |result, openid_url|
+        if result.successful?
+          if self.current_user = User.find_by_openid_url(openid_url)
+            successful_login
+          else
+            failed_login "Sorry, no user by the identity URL {openid_url} exists"[:openid_no_user_message, openid_url.inspect]
+          end
+        else
+          failed_login result.message
+        end
+      end
+    end
+
+  
 end
