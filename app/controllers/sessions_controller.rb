@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     else
       if using_open_id?
         cookies[:use_open_id] = {:value => '1', :expires => 1.year.from_now.utc}
-        open_id_authentication
+        open_id_authentication(params[:openid_url])
       else
         cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
         password_authentication params[:login], params[:password]
@@ -40,19 +40,28 @@ class SessionsController < ApplicationController
 
   protected
   
-        def password_authentication(name, password)
-        if @current_user = @account.users.authenticate(params[:name], params[:password])
-          successful_login
-        else
-          failed_login "Sorry, that username/password doesn't work"
-        end
-      end
+  def password_authentication(name, password)
+    if @current_user = @account.users.authenticate(params[:name], params[:password])
+      successful_login
+    else
+      failed_login "Sorry, that username/password doesn't work"
+   end
+  end
 
-    def open_id_authentication
-      authenticate_with_open_id params[:openid_url] do |result, openid_url|
+  def open_id_authentication(openid_url)
+
+       authenticate_with_open_id(openid_url, :required => [:nickname, :email]) do |result, openid_url, registration|
         if result.successful?
-          if self.current_user = User.find_by_openid_url(openid_url)
+          @user = User.find_or_initialize_by_openid_url(openid_url)
+          @current_user  = @user
+          if @current_user 
+            if @user.new_record?
+              @user.login = registration['nickname']
+              @user.email = registration['email']
+              @user.save(false)
+            end
             successful_login
+            
           else
             failed_login "Sorry, no user by the identity URL {openid_url} exists"[:openid_no_user_message, openid_url.inspect]
           end

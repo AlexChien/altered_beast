@@ -31,7 +31,7 @@ module ApplicationHelper
       "<span class='flag'>#{$1}</span>" + 
       link_to(h($2.strip), forum_topic_path(@forum, topic), options)
     else
-      link_to(h(topic.title), forum_topic_path(@forum, topic), options)
+      link_to(h(topic.title), forum_topic_path(@forum.id, topic.id), options)
     end
   end
 

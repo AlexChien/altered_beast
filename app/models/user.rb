@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :monitorships, :dependent => :delete_all
   has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
   
-  has_permalink :login, :scope => :site_id
+  has_permalink [:id, :login], :scope => :site_id
   
   attr_readonly :posts_count, :last_seen_at
 
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def openid_url=(value)
-    write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_url(value)
+    write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_identifier(value)
   end
 
   def to_xml(options = {})
