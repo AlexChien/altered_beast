@@ -14,6 +14,7 @@ class User
   before_save :downcase_email_and_login
   before_save :encrypt_password
   before_create :set_first_user_as_admin
+  validates_email_format_of :email, :message=>"is invalid"  
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
