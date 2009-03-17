@@ -62,5 +62,15 @@ class SessionsController < ApplicationController
       end
     end
 
-  
+      private
+      def successful_login
+        session[:user_id] = @current_user.id
+        redirect_to(root_url)
+      end
+
+      def failed_login(message)
+        flash[:error] = message
+        redirect_to(new_session_url)
+      end
+
 end

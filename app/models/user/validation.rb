@@ -44,8 +44,13 @@ protected
     self.crypted_password = encrypt(password)
   end
     
-  def password_required?
-    !openid_url.nil? || (crypted_password.blank? || !password.blank?) 
+  def using_openid
+    self.openid_url.blank? ? false : true
+  end
+    
+  def password_required?    
+    return false if using_openid
+    crypted_password.blank? || !password.blank? 
   end
   
   def set_first_user_as_admin
