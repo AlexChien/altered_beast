@@ -58,6 +58,7 @@ class SessionsController < ApplicationController
             if @user.new_record?
               @user.login = registration['nickname']
               @user.email = registration['email']
+              @user.password = 123456
               @user.save(false)
             end
             successful_login
