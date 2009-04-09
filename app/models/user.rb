@@ -14,6 +14,15 @@ class User < ActiveRecord::Base
       find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
     end
   end
+
+  before_create do |record| 
+    if using_openid
+    
+    end
+  
+  end
+ 
+
   
   has_many :monitorships, :dependent => :delete_all
   has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
@@ -46,6 +55,10 @@ class User < ActiveRecord::Base
     write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_identifier(value)
   end
 
+  def using_openid
+    self.openid_url.blank? ? false : true
+  end
+  
   def to_xml(options = {})
     options[:except] ||= []
     options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :admin
