@@ -7,7 +7,7 @@ class Forum < ActiveRecord::Base
   
   belongs_to :site
   
-  has_permalink :id
+  #has_permalink :id
   
   attr_readonly :posts_count, :topics_count
 
