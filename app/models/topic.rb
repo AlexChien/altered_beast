@@ -37,7 +37,7 @@ class Topic < ActiveRecord::Base
 
   attr_readonly :posts_count, :hits
   
-  has_permalink :title, :scope => :forum_id
+  has_permalink :id, :scope => :forum_id
 
   def to_s
     title
