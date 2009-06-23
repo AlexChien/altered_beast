@@ -65,6 +65,6 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    id
+    id.to_s
   end
 end

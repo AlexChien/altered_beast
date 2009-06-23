@@ -16,8 +16,9 @@ Rails::Initializer.run do |config|
   # -- all .rb files in that directory are automatically loaded.
   # See Rails::Configuration for more options.
 
-  config.gem 'mislav-will_paginate', :lib => "will_paginate", 
-    :source => "http://gems.github.com"
+  # use plugin instead
+  # config.gem 'mislav-will_paginate', :lib => "will_paginate", 
+  #   :source => "http://gems.github.com"
 
   # Skip frameworks you're not going to use (only works if using vendor/rails).
   # To use Rails without a database, you must remove the Active Record framework
@@ -42,8 +43,8 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_altered_beast_session',
-    :secret      => 'f471415647be47dc513d5e345ca4e582a8f99f388e0ccd46a2cdac51e2cd27c8e8b4d7dbba379cf661d4857afaf6b1867489bbc5e16b5fb14d2c3e53df64c272'
+    :session_key => '_enjoyoung_session',
+    :secret      => 'e498b0e49cb161810454afac7cbdb3f89876fed13bea202f7daab24e34e6e84a8b110353ca16e54180dc7979dcbda896a57e6f4164eed268915a5a46d8d8c773'
   }
 
   # Use the database for sessions instead of the cookie-based default,

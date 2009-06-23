@@ -70,7 +70,7 @@ class Topic < ActiveRecord::Base
   end
   
   def to_param
-    permalink
+    permalink.to_s
   end
 
 protected
