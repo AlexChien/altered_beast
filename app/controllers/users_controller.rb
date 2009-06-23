@@ -87,9 +87,9 @@ class UsersController < ApplicationController
 protected
   def find_user
     @user = if admin?
-      current_site.all_users.find_by_permalink(params[:id])
+      current_site.all_users.find(params[:id])
     else
-      current_site.users.find_by_permalink(params[:id])
+      current_site.users.find(params[:id])
     end or raise ActiveRecord::RecordNotFound
   end
   
