@@ -7,20 +7,20 @@
 <% end %>
 
 <% if admin? %>
-<h6><%= 'Admin'[:admin_title] %></h6>
-<p><%= link_to 'Create New Site'[:create_new_site], new_site_path, :class => "utility" %></p>
+<h6><%= t(:'forum.admin_title') %></h6>
+<p><%= link_to t(:'forum.create_new_site'), new_site_path, :class => "utility" %></p>
 <% end %>
 
 <% end %>
 
-<h1 style="margin-top:0;"><%= 'Sites'[:sites_title] %></h1>
+<h1 style="margin-top:0;"><%= t(:'forum.sites_title') %></h1>
 <%= will_paginate @sites %>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
-    <th class="la" width="60%"><%= 'Site'[:forum_title] %></th>
-    <th class="la" width="15%"><%= 'Forums'[:forum_title] %></th>
-    <th class="la" width="15%"><%= 'Users'[:user_title] %></th>
+    <th class="la" width="60%"><%= t(:'forum.forum_title') %></th>
+    <th class="la" width="15%"><%= t(:'forum.forum_title') %></th>
+    <th class="la" width="15%"><%= t(:'forum.user_title') %></th>
     <th class="la" width="10%">&nbsp;</th>
   </tr>
 <% @sites.each do |site| -%>  
@@ -30,13 +30,13 @@
 			<%= content_tag(:small, "(#{h(site.host)})") unless site.default? -%>
     </td>
     <td class="c2">
-      <%= link_to pluralize(site.forums.count, 'Forum'[:forum]), forums_url(:host => site.host, :port => request.port) %>
+      <%= link_to pluralize(site.forums.count, t(:'forum.forum')), forums_url(:host => site.host, :port => request.port) %>
     </td>
     <td class="c2">
-      <%= link_to pluralize(site.users.count, 'User'[:user]), users_url(:host => site.host, :port => request.port) %>
+      <%= link_to pluralize(site.users.count, t(:'forum.user')), users_url(:host => site.host, :port => request.port) %>
     </td>
     <td class="c2">
-      <%= link_to 'Edit'[:edit_title], edit_site_path(site), :class => "tiny", :rel => "directory" if admin? %>
+      <%= link_to t(:'forum.edit_title'), edit_site_path(site), :class => "tiny", :rel => "directory" if admin? %>
     </td>
   </tr>
 <% end %>

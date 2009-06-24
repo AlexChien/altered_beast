@@ -12,11 +12,13 @@ module ForumsHelper
   end
 
   def topic_count
-    pluralize current_site.topics.size, 'topic'
+    # pluralize current_site.topics.size, 'topic'
+    t(:'forum.topic_count', :count => current_site.topics.size)
   end
   
   def post_count
-    pluralize current_site.posts.size, 'post'
+    # pluralize current_site.posts.size, 'post'
+    t(:'forum.post_count', :count => current_site.posts.size)
   end
   
   def last_active

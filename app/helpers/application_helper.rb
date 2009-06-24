@@ -2,27 +2,29 @@ require 'md5'
 module ApplicationHelper
   def feed_icon_tag(title, url)
     (@feed_icons ||= []) << { :url => url, :title => title }
-    link_to image_tag('feed-icon.png', :size => '14x14', :alt => "Subscribe to #{title}"), url
+    link_to image_tag('feed-icon.png', :size => '14x14', :alt => "#{t(:'forum.subsribe_to')} #{title}"), url
   end
 
   def pagination(collection)
     if collection.total_entries > 1
-      "<p class='pages'>" + 'Pages'[:pages_title] + ": <strong>" + 
-      will_paginate(collection, :inner_window => 10, :next_label => "next"[], :prev_label => "previous"[]) +
+      "<p class='pages'>" + t(:'forum.pages_title') + ": <strong>" + 
+      will_paginate(collection, :inner_window => 10, :next_label => t(:'forum.next'), :prev_label => t(:'forum.previous')) +
       "</strong></p>"
     end
   end
   
   def next_page(collection)
     unless collection.current_page == collection.total_entries or collection.total_entries == 0
-      "<p style='float:right;'>" + link_to("Next page"[], { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
+      "<p style='float:right;'>" + link_to(t(:'forum.next_page'), { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
     end
   end
 
   def search_posts_title
-    returning(params[:q].blank? ? 'Recent Posts'[] : "Searching for"[] + " '#{h params[:q]}'") do |title|
-      title << " "+'by {user}'[:by_user,h(@user.display_name)] if @user
-      title << " "+'in {forum}'[:in_forum,h(@forum.name)] if @forum
+    returning(params[:q].blank? ? t(:'forum.recent_posts') : t(:'forum.searching_for') + " '#{h params[:q]}'") do |title|
+      # title << " "+'by {user}'[:by_user,h(@user.display_name)] if @user
+      # title << " "+'in {forum}'[:in_forum,h(@forum.name)] if @forum
+      title << " "+ t(:'forum.by_user', :user => h(@user.display_name)) if @user
+      title << " "+ t(:'forum.in_forum', :forum => h(@forum.name)) if @forum
     end
   end
 
@@ -63,7 +65,8 @@ module ApplicationHelper
 
   @@default_jstime_format = "%d %b, %Y %I:%M %p"
   def jstime(time, format = nil)
-    content_tag 'span', time.strftime(format || @@default_jstime_format), :class => 'time'
+    # content_tag 'span', time.strftime(format || @@default_jstime_format), :class => 'time'
+    content_tag 'span', distance_of_time_in_words_to_now(time, :format => format || @@default_jstime_format), :class => 'time'
   end
 
   def for_moderators_of(record, &block)

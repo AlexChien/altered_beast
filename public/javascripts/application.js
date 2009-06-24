@@ -81,7 +81,7 @@ var PostForm = {
 }
 
 Event.addBehavior({
-	'span.time': toTimeAgoInWords,
+	// 'span.time': toTimeAgoInWords,
 	'#search, #reply': function() { this.hide() },
 	'#search-link:click': function() {
 		$('search').toggle();

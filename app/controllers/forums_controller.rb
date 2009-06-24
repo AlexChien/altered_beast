@@ -53,7 +53,7 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       if @forum.save
-        flash[:notice] = 'Forum was successfully created.'
+        flash[:notice] = t(:'forum.flash.forum_create_success')
         format.html { redirect_to(@forum) }
         format.xml  { render :xml => @forum, :status => :created, :location => @forum }
       else
@@ -70,7 +70,7 @@ class ForumsController < ApplicationController
 
     respond_to do |format|
       if @forum.update_attributes(params[:forum])
-        flash[:notice] = 'Forum was successfully updated.'
+        flash[:notice] = t(:'forum.flash.forum_update_success')
         format.html { redirect_to(@forum) }
         format.xml  { head :ok }
       else

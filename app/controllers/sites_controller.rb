@@ -37,8 +37,8 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.save
-        flash[:notice] = 'Site was successfully created.'
-        flash[:notice] += ' Please create your account.' unless logged_in?
+        flash[:notice] = t(:'forum.flash.site_create_success')
+        flash[:notice] += t(:'forum.flash.please_create_your_account') unless logged_in?
         format.html do
           redirect_to logged_in? ? @site : signup_path
         end
@@ -55,7 +55,7 @@ class SitesController < ApplicationController
 
     respond_to do |format|
       if @site.update_attributes(params[:site])
-        flash[:notice] = 'Site was successfully updated.'
+        flash[:notice] = t(:'forum.flash.site_update_success')
         format.html { redirect_to(@site) }
         format.xml  { head :ok }
       else
