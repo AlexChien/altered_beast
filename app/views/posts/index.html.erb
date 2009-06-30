@@ -9,7 +9,7 @@
 </h1>
 <p class="subtitle">
   <%= feed_icon_tag @page_title, search_path(true) %>
-  <%= t(:'forum.post_found', :count => number_with_delimiter(@posts.total_entries)) %>
+  <%= t(:'forum.posts_count_found', :count => number_with_delimiter(@posts.total_entries)) %>
 </p>
 
 <%= will_paginate @posts %>
@@ -35,7 +35,7 @@
   </td>
   <td class="body entry-content">
     <p class="topic">
-      <%= t(:'forum."Topic"') %>: <%= link_to h(post.forum.name), forum_path(post.forum) %> / 
+      <%= t(:'forum.topic_title') %>: <%= link_to h(post.forum.name), forum_path(post.forum) %> / 
       <%= link_to h(post.topic.title), forum_topic_path(post.forum, post.topic) %>
     </p>
     
