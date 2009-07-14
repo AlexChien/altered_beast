@@ -25,7 +25,6 @@
       <% end -%>
     </li>
     <li><%= link_to_function t(:'forum.search_title'), "#", :href => root_path, :id => 'search-link' %></li>
-
     <% if @current_site and logged_in? -%>
     <li class="login"><%=  link_to current_user.login, user_path(current_user) %></li>
     <li class="logout"><%= link_to t(:'forum.settings_title'), settings_path %></li>

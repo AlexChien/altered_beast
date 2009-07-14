@@ -213,8 +213,9 @@
       find_a_user: 查找一个用户
       display_name_or_login: 显示名称与注册名称
       users: 用户列表
-      active: 激活
-      lurking: 潜水的
+      user_count: "{{count}} 用户"
+      active_user_count: "{{count}} 活跃用户"
+      lurking_user_count: "{{count}} 潜水员"
       add_as_moderator: 加为斑竹
       user_is_an_administrator: 用户是一个管理员
       suspend_user_account: 封停用户帐号
@@ -284,6 +285,7 @@
       once: 
       and_again: 请再输一次
 
+      openid_url_title: OpenID认证资料
       open_id_field: 如果你有OpenID，请输入它
       open_id_field_extended: "除了星尚通行证，您还可以输入其他的OpenID身份验证地址，如果您知道的话。如果您使用的身份验证地址支持 {{sreg}} 扩展，那您可以 {{login_link}} 并自动创建帐户"
       login_field: "用户名应该至少以2个字母开头，可以包含字母、数字以及下划线。"
