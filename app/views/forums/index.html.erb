@@ -1,57 +1,57 @@
 <% content_for :right do %>
 
-<h5><%= 'What is Beast?'[:beast_sidebar_title] %></h5>
-
-<p>
-  <%= 'A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we\'re done.'[:beast_sidebar_body] %>
-</p>
+<% if @current_site %>
+<%= @current_site.description %>
+<% else %>
+<%= main_site_description %>
+<% end %>
 
 <% if admin? %>
-<h6><%= 'Admin'[:admin_title] %></h6>
-<p><%= link_to 'Create New Forum'[:create_new_forum], new_forum_path, :class => "utility" %></p>
+<h6><%= t(:'forum.admin_title') %></h6>
+<p><%= link_to t(:'forum.create_new_forum'), new_forum_path, :class => "utility" %></p>
 <% end %>
 
 <% end %>
 
-<h1 style="margin-top:0;"><%= 'Forums'[:forums_title] %></h1>
+<h1 style="margin-top:0;"><%= t(:'forum.forums_title') %></h1>
 <p class="subtitle">
-<%= feed_icon_tag "Recent Posts"[:recent_posts], formatted_posts_path(:format => 'atom') %>
+<%= feed_icon_tag t(:'forum."Recent Posts"'), formatted_posts_path(:format => 'atom') %>
 <%= topic_count %>, <%= post_count %> <%# OPTIMIZE ME voice_count %>
 </p>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
-    <th class="la" width="70%" colspan="3"><%= 'Forum'[:forum_title] %></th>
-    <th class="la" width="30%" colspan="1"><%= 'Last Post'[:last_post] %></th>
+    <th class="la" width="70%" colspan="3"><%= t(:'forum.forum_title') %></th>
+    <th class="la" width="30%" colspan="1"><%= t(:'forum.last_post') %></th>
   </tr>
 <% for forum in @forums do %>  
   <tr>
     <td class="vat c1">
     
       <% if recent_forum_activity(forum) %>
-      <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => 'Recent activity'[:recent_activity] %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => t(:'forum.recent_activity') %>
       <% else %>
-      <%= image_tag "clearbits/comment.gif", :class => "icon grey", :title => 'No recent activity'[:no_recent_activity] %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon grey", :title => t(:'forum.no_recent_activity') %>
       <% end %>
     </td>
     <td class="c2 vat">
       <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
       <div class="posts">
-        <%= '{count} topics'[(count=forum.topics.size)==1 ? :topic_count : :topics_count, number_with_delimiter(count)] %>, 
-        <%= '{count} posts'[(count=forum.posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %>
+        <%= t(:'forum.topic_count', :count => number_with_delimiter(forum.topics.size)) %>
+        <%= t(:'forum.post_count', :count => number_with_delimiter(forum.posts.size)) %>
       </div>
       <p class="desc"><%= forum.description_html %>
         </p>
     </td>
     <td class="c3">
-      <%= link_to 'Edit'[:edit_title], edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
+      <%= link_to t(:'forum.edit_title'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
     </td>
 
     <td class="inv lp">
       <% if forum.recent_post -%>
         <%= jstime forum.recent_post.created_at %><br />
         <%= 'by {user}'[:by_user,"<strong>#{h(forum.recent_post.user.display_name)}</strong>"] %>
-        <span>(<%= link_to 'view'[], forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+        <span>(<%= link_to  t(:'forum.view'), forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
       <% end -%>
     </td>
   </tr>
@@ -59,7 +59,7 @@
 </table>
 
 <p>
-  <%= link_to 'Recent posts'[:recent_posts], posts_path %>
+  <%= link_to t(:'forum.recent_posts'), posts_path %>
 </p>
 
 <%# TODO: online_users = User.currently_online -%>
@@ -67,7 +67,7 @@
 <div class="stats">
 <div class="users">
 <% unless online_users.empty? %>
-<%= 'Users online:'[:users_online] %> <%= online_users.map { |u| link_to "<strong>#{h u.display_name}</strong>", user_path(u) } * ", " %><br />
+<%= t(:'forum.users_online') %> <%= online_users.map { |u| link_to "<strong>#{h u.display_name}</strong>", user_path(u) } * ", " %><br />
 <% end %>
 </div>
 </div>

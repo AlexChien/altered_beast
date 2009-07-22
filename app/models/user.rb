@@ -90,6 +90,6 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    permalink
+    id.to_s
   end
 end

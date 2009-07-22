@@ -1,9 +1,9 @@
-<h1>Log In </h1>
+<h1><%= t(:'forum.login') %></h1>
 
 <% form_tag session_path do -%>
 <div id="password_fields"<%= %( style="display:none") unless cookies['use_open_id'].blank? %>>
 <p>
-  <label for="login"><%= 'Login'[:Login] %> or <%= link_to_function "login with OpenID", "LoginForm.setToOpenID()" %></label>
+  <label for="login"><%= t(:'forum.login') %> or <%= link_to_function "login with OpenID", "LoginForm.setToOpenID()" %></label>
   <br />
   <%= text_field_tag :login, @login %>
   
@@ -12,7 +12,7 @@
   <%= hidden_field_tag :to, params[:to] if params[:to] %>
 
 <p>
-  <label for="password"><%= 'Password'[:password_title] %></label><br />
+  <label for="password"><%= t(:'forum.password_title') %></label><br />
   <%= password_field_tag :password %>
 </p>
 </div>
@@ -26,10 +26,10 @@
 </p>
 </div>
 
-<p><label><%= check_box_tag "remember_me", "1", true %> <%= 'Remember me on this computer'[:remember_me] %></label></p>
+<p><label><%= check_box_tag "remember_me", "1", true %> <%= t(:'forum.remember_me') %></label></p>
 
 
-<p><%= submit_tag 'Login'[:login_action], :or => link_to_function('reset password'[], "$('reset-password').toggle();") %></p>
+<p><%= submit_tag t(:'forum.login'), :or => link_to_function('reset password'[], "$('reset-password').toggle();") %></p>
 <% end -%>
 
 <% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>

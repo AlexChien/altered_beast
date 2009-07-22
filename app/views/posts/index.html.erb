@@ -4,12 +4,12 @@
 <% if params[:q].blank? -%>
   <%= @page_title %>
 <% else -%>
-  <%= 'Searching for'[] %> '<%= h params[:q] %>'
+  <%= t(:'forum.searching_for') %> '<%= h params[:q] %>'
 <% end -%>
 </h1>
 <p class="subtitle">
   <%= feed_icon_tag @page_title, search_path(true) %>
-  <%= '{count} post(s) found'[(count=@posts.total_entries)==1 ? :post_count_found : :posts_count_found, number_with_delimiter(count)] %>
+  <%= t(:'forum.posts_count_found', :count => number_with_delimiter(@posts.total_entries)) %>
 </p>
 
 <%= will_paginate @posts %>
@@ -30,12 +30,12 @@
     </div>
 
     <%= avatar_for @users[post.user_id] %>
-    <span class="fn"><%= link_to truncate(h(@users[post.user_id].display_name), 15), user_path(post.user) %></span>
+    <span class="fn"><%= link_to truncate(h(@users[post.user_id].display_name), :length => 15), user_path(post.user) %></span>
     <span class="posts"><%= '{count} posts'[(count=@users[post.user_id].posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %></span>
   </td>
   <td class="body entry-content">
     <p class="topic">
-      <%= "Topic"[:topic_title] %>: <%= link_to h(post.forum.name), forum_path(post.forum) %> / 
+      <%= t(:'forum.topic_title') %>: <%= link_to h(post.forum.name), forum_path(post.forum) %> / 
       <%= link_to h(post.topic.title), forum_topic_path(post.forum, post.topic) %>
     </p>
     

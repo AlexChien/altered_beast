@@ -50,7 +50,7 @@ class PostsController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
       else
-        flash[:notice] = 'Post was successfully created.'
+        flash[:notice] = t(:'forum.flash.post_create_success')
         format.html { redirect_to(forum_topic_post_path(@forum, @topic, @post, :anchor => dom_id(@post))) }
         format.xml  { render :xml  => @post, :status => :created, :location => forum_topic_post_url(@forum, @topic, @post) }
       end
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        flash[:notice] = 'Post was successfully updated.'
+        flash[:notice] = t(:'forum.flash.post_update_success')
         format.html { redirect_to(forum_topic_path(@forum, @topic, :anchor => dom_id(@post))) }
         format.xml  { head :ok }
       else
@@ -84,8 +84,8 @@ protected
     if params[:user_id]
       @parent = @user = User.find_by_permalink(params[:user_id])
     elsif params[:forum_id]
-      @parent = @forum = Forum.find_by_permalink(params[:forum_id])
-      @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]
+      @parent = @forum = Forum.find(params[:forum_id])
+      @parent = @topic = @forum.topics.find(params[:topic_id]) if params[:topic_id]
     end
   end
   

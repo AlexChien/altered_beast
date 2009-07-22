@@ -25,18 +25,20 @@
 </p>
 -->
 <p class="disclaim">
-<strong>
-  <%
-  footers=["Two's company. Three's a forum. More's a Beast."[:footer_message]
-  ]
-  %>
-  <%= footers[rand(footers.size)]%>
+  <strong>
+  <% if @current_site %>
+    <%= @current_site.tagline %>
+  <% else main_site %>
+    <%= main_site_tagline %>
+  <% end %>
   </strong>
 </p>
+<% if false %>
 <p class="credit">
-  <%= 'Powered by'[:powered_by] %> <a href="http://beast.caboo.se/">Beast</a><br />
-  &copy; 2006 <a href="http://www.workingwithrails.com/person/5337-josh-goebel" class="subtle">Josh Goebel</a> <%= 'and'[:and] %> <a href="http://weblog.techno-weenie.net" class="subtle">Rick Olson</a>
+  <%= t(:'forum.powered_by') %> <a href="http://beast.caboo.se/">Beast</a><br />
+  &copy; 2006 <a href="http://www.workingwithrails.com/person/5337-josh-goebel" class="subtle">Josh Goebel</a> <%= t(:'forum.and') %> <a href="http://weblog.techno-weenie.net" class="subtle">Rick Olson</a>
 </p>
+<% end %>
 <br style="clear:both;" />
 </div>
 </body>

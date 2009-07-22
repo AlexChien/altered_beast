@@ -8,6 +8,7 @@ class Forum < ActiveRecord::Base
   belongs_to :site
   
   has_permalink [:id, :name]
+  # has_permalink :id
   
   attr_readonly :posts_count, :topics_count
 
@@ -32,7 +33,7 @@ class Forum < ActiveRecord::Base
   end
   
   def to_param
-    permalink
+    id.to_s
   end
 
   def to_s

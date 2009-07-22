@@ -34,17 +34,17 @@ Date.prototype.strftime = function (fmt) {
 Date.distanceOfTimeInWords = function(fromTime, toTime, includeTime) {
   var delta = parseInt((toTime.getTime() - fromTime.getTime()) / 1000);
   if(delta < 60) {
-      return 'less than a minute ago';
+      return '刚刚';
   } else if(delta < 120) {
-      return 'about a minute ago';
+      return '大约1分钟前';
   } else if(delta < (45*60)) {
-      return (parseInt(delta / 60)).toString() + ' minutes ago';
+      return (parseInt(delta / 60)).toString() + ' 分钟功能前';
   } else if(delta < (120*60)) {
-      return 'about an hour ago';
+      return '大约1小时前';
   } else if(delta < (24*60*60)) {
-      return 'about ' + (parseInt(delta / 3600)).toString() + ' hours ago';
+      return 'about ' + (parseInt(delta / 3600)).toString() + ' 小时前';
   } else if(delta < (48*60*60)) {
-      return '1 day ago';
+      return '1 天';
   } else {
     var days = (parseInt(delta / 86400)).toString();
     if(days > 5) {
@@ -53,7 +53,7 @@ Date.distanceOfTimeInWords = function(fromTime, toTime, includeTime) {
       if(includeTime) fmt += ' %I:%M %p'
       return fromTime.strftime(fmt);
     } else {
-      return days + " days ago"
+      return days + " 天前"
     }
   }
 }

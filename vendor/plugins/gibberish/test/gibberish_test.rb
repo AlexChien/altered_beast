@@ -125,7 +125,7 @@ end
 
 context "A gibberish string (in general)" do
   specify "should be a string" do
-    "gibberish"[:just_a_string].should.be.an.instance_of String
+    t(:'forum."gibberish"').should.be.an.instance_of String
     "non-gibberish".should.be.an.instance_of String
   end
 
@@ -147,12 +147,12 @@ context "A gibberish string (in general)" do
   end
 
   specify "should return nil if a reserved key is used" do
-    "string"[:limit].should.be.nil
+    t(:'forum."string"').should.be.nil
   end
   
   specify "should set default key to underscored string" do
     Gibberish.current_language = :es
-    'welcome friend'[].should == '¡Recepción, amigo!'
+    'welcome friend'[].should == 'Â¡RecepciÃ³n, amigo!'
   end
 end
 
@@ -175,8 +175,8 @@ context "When a non-default language is set" do
   end
 
   specify "a gibberish string should return a translated version of itself if a corresponding key is found" do
-    "Welcome, friend!"[:welcome_friend].should.equal "¡Recepción, amigo!"
-    "I love Rails."[:love_rails].should.equal "Amo los carriles."
-    'Welcome, {user}!'[:welcome_user, 'Marvin'].should.equal "¡Recepción, Marvin!"
+    t(:'forum."Welcome, friend!"').should.equal "Â¡RecepciÃ³n, amigo!"
+    t(:'forum."I love Rails."').should.equal "Amo los carriles."
+    'Welcome, {user}!'[:welcome_user, 'Marvin'].should.equal "Â¡RecepciÃ³n, Marvin!"
   end
 end

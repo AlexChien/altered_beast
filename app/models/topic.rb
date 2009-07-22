@@ -38,6 +38,7 @@ class Topic < ActiveRecord::Base
   attr_readonly :posts_count, :hits
   
   has_permalink [:id, :title], :scope => :forum_id
+  # has_permalink :id, :scope => :forum_id
 
   def to_s
     title
@@ -70,7 +71,7 @@ class Topic < ActiveRecord::Base
   end
   
   def to_param
-    permalink
+    id.to_s
   end
 
 protected
