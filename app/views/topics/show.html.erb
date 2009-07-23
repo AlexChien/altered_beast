@@ -13,15 +13,15 @@
 
 <% end # right content -%>
 
-<% if false#logged_in? %>
+<% if false && logged_in? %>
 
 <% form_tag monitorship_path(@forum, @topic), :style => 'margin-top:0em; float:right;' do -%>
 <div>
   <input id="monitor_checkbox" type="checkbox" <%= "checked='checked'" if @monitoring %> 
-    onclick="if (this.checked) {<%= remote_function :url => monitorship_path(@forum, @topic) %>} else {<%= remote_function :url => monitorship_path(@forum, @topic), :method => :delete %>}" />
+    onclick="if (this.checked) {<%= remote_function :url => monitorship_path(@forum, @topic.id) %>} else {<%= remote_function :url => monitorship_path(@forum, @topic.id), :method => :delete %>}" />
   <label id="monitor_label" for="monitor_checkbox"><%= @monitoring ?  t(:'forum.monitoring_topic') :  t(:'forum.monitor_topic') %></label>
   <%= hidden_field_tag '_method', 'delete' if @monitoring %>
-  <%= submit_tag :Set, :id => 'monitor_submit' %>
+  <%= submit_tag :Set, :value => '确定', :id => 'monitor_submit' %>
 </div>
 <% end -%>
 

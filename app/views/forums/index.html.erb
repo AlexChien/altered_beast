@@ -21,12 +21,13 @@
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
-    <th class="la" width="70%" colspan="3"><%= t(:'forum.forum_title') %></th>
+    <th class="la" colspan="3"><%= t(:'forum.forum_title') %></th>
+    <th class="la" width="60" colspan="1" nowrap="nowrap" style="text-align:center;"><%= t(:'forum.topic_title') %>/<%= t(:'forum.post_title') %></th>
     <th class="la" width="30%" colspan="1"><%= t(:'forum.last_post') %></th>
   </tr>
 <% for forum in @forums do %>  
-  <tr>
-    <td class="vat c1">
+  <tr class="forum" id="forum_<%= forum.id %>_row">
+    <td class="vat c1" style="width:20px;">
     
       <% if recent_forum_activity(forum) %>
       <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => t(:'forum.recent_activity') %>
@@ -36,22 +37,26 @@
     </td>
     <td class="c2 vat">
       <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
-      <div class="posts">
-        <%= t(:'forum.topic_count', :count => number_with_delimiter(forum.topics.size)) %>
-        <%= t(:'forum.post_count', :count => number_with_delimiter(forum.posts.size)) %>
-      </div>
-      <p class="desc"><%= forum.description_html %>
-        </p>
+      <!-- <div class="posts">
+        <%#= t(:'forum.topic_count', :count => number_with_delimiter(forum.topics.size)) %>
+        <%#= t(:'forum.post_count', :count => number_with_delimiter(forum.posts.size)) %>
+      </div> -->
+      <p class="desc"><%= forum.description_html %></p>
+      <div class="forum_mod_list"><%= t(:'forum.moderator_title') %>: <%= mod_list(forum) %></div>
     </td>
     <td class="c3">
       <%= link_to t(:'forum.edit_title'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
     </td>
+    
+    <td class="inv lp" nowrap="nowrap" align="center">
+        <%= forum.topics.size %>/<%= forum.posts.size %>
+    </td>
 
     <td class="inv lp">
       <% if forum.recent_post -%>
-        <%= jstime forum.recent_post.created_at %><br />
-        <%= 'by {user}'[:by_user,"<strong>#{h(forum.recent_post.user.display_name)}</strong>"] %>
-        <span>(<%= link_to  t(:'forum.view'), forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+        <%= jstime forum.recent_post.created_at %>
+        by
+        <span><%= link_to "<strong class=\"fn\">#{h(forum.recent_post.user.display_name)}</strong>", forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %></span>
       <% end -%>
     </td>
   </tr>

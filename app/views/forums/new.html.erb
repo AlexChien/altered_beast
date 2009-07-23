@@ -2,7 +2,7 @@
   <%= link_to t(:'forum.forums_title'), root_path %> <span class="arrow">&rarr;</span>
 </div>
 
-<h1><%= t(:'forum.ew_forum') %></h1>
+<h1><%= t(:'forum.new_forum') %></h1>
 
 <% form_for :forum, :url => forums_path do |f| -%>
 <%= render :partial => "form", :object => f %>

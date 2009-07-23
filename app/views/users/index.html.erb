@@ -18,10 +18,10 @@
   <tr>
     <th class="la" width="88%"><%= t(:'forum.name_or_login') %></th>
 	<% if logged_in? && current_user.admin? -%>
-	<th><%= t(:'forum.current_status') %></th>
+	<th nowrap="nowrap"><%= t(:'forum.current_status') %></th>
 	<% end -%>
-    <th><%= t(:'forum.website_title') %></th>
-    <th width="1%"><%= t(:'forum.posts_title') %></th>
+    <th nowrap="nowrap"><%= t(:'forum.website_title') %></th>
+    <th  nowrap="nowrap"><%= t(:'forum.posts_title') %></th>
   </tr>
 <% @users.each do |user|-%>  
   <tr>
@@ -31,14 +31,14 @@
       </span>
 	  </td>
 	<% if logged_in? && current_user.admin? -%>
-		<td><%= user.state %></td>
+		<td nowrap="nowrap"><%= user.state %></td>
 	<% end -%>
-    <td class="la">
+    <td class="la" nowrap="nowrap">
       <% unless user.website.blank? %>
       <%= sanitize link_to(user.website.gsub("http://",""), "http://" + user.website.gsub("http://","")) %>
       <% end %>
     </td>
-    <td class="ca inv"><%= user.posts.size %></td>
+    <td class="ca inv" nowrap="nowrap"><%= user.posts.size %></td>
   </tr>
 <% end %>
 </table>

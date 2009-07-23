@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  before_create do |record| 
-    if using_openid
-    
-    end
-  
-  end
+  # before_create do |record| 
+  #   if using_openid
+  #   
+  #   end
+  # 
+  # end
  
 
   

@@ -13,8 +13,15 @@ var LoginForm = {
   setToOpenID: function() {
     $('password_fields').hide();
     $('openid_fields').show();
+  },
+
+  checkOpenIDFormat: function() {
+  	var url = $('openid_input').value;
+  	url = url.indexOf('http://')<0&&url.indexOf('https://')<0 ? 'http://openid.enjoyoung.cn/'+url : url
+      $('openid_url').value = url;
   }
 }
+    
 
 var PostForm = {
 	postId: null,
@@ -80,26 +87,48 @@ var PostForm = {
   }
 }
 
+var RowManager = {
+	addMouseBehavior : function(ele){
+		ele.onmouseover = function(e){ 
+			ele.addClassName('topic_over'); 
+		}
+		
+		ele.onmouseout = function(e){
+			ele.removeClassName('topic_over');
+		}
+	}
+};
+
 Event.addBehavior({
 	// 'span.time': toTimeAgoInWords,
 	'#search, #reply': function() { this.hide() },
 	'#search-link:click': function() {
 		$('search').toggle();
 		$('search_box').focus();
-		return false
+		return false;
+	},
+	
+	'tr.forum' : function() {
+		RowManager.addMouseBehavior(this);
+	},
+	
+	'tr.topic' : function(){
+		RowManager.addMouseBehavior(this);
 	},
 	
 	'tr.post': function() {
 		var postId = this.id.match(/^post_(\d+)-/)[1]
-                var anchor = this.down(".edit a")
-                if(anchor) { PostForm.edit.attach(anchor, postId) };
+		var anchor = this.down(".edit a")
+		if(anchor) { PostForm.edit.attach(anchor, postId) };
+		
+		RowManager.addMouseBehavior(this);
 	},
 	
 	'#reply-link': function() {
-		PostForm.reply.attach(this)
+		PostForm.reply.attach(this);
 	},
 	
 	'#reply-cancel': function() {
-		PostForm.cancel.attach(this)
+		PostForm.cancel.attach(this);
 	}
-})
+});

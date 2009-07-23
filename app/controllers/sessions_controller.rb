@@ -27,8 +27,18 @@ class SessionsController < ApplicationController
       end
 
       #render :action => 'new'
-      flash[:error] = t(:'forum.flash.login_failed')
-      render :action => 'new'
+      # flash[:error] = t(:'forum.flash.login_failed')
+      # render :action => 'new'
+    end
+  end
+  
+  def create
+    if using_open_id?
+      cookies[:use_open_id] = {:value => '1', :expires => 1.year.from_now.utc}
+      open_id_authentication(params[:openid_url])
+    else
+      cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
+      password_authentication params[:login], params[:password]
     end
   end
 
@@ -43,7 +53,7 @@ class SessionsController < ApplicationController
   protected
   
   def password_authentication(name, password)
-    if @current_user = @account.users.authenticate(params[:name], params[:password])
+    if @current_user = current_site.users.authenticate(params[:name], params[:password])
       successful_login
     else
       failed_login "Sorry, that username/password doesn't work"
@@ -58,9 +68,11 @@ class SessionsController < ApplicationController
           @current_user  = @user
           if @current_user 
             if @user.new_record?
-              @user.login = registration['nickname']
+              @user.login = openid_url
               @user.email = registration['email']
               @user.password = 123456
+              @user.site = Site.find(:first)
+              @user.display_name = registration['nickname']
               @user.save(false)
             end
             successful_login
@@ -76,8 +88,9 @@ class SessionsController < ApplicationController
 
       private
       def successful_login
+        flash[:notice] = t(:'forum.flash.login_success')
         session[:user_id] = @current_user.id
-        redirect_to(root_url)
+        redirect_back_or_default('/')
       end
 
       def failed_login(message)

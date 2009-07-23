@@ -29,5 +29,10 @@ module ForumsHelper
   def voice_count
     pluralize current_site.topics.to_a.sum { |t| t.voice_count }, 'voice'
   end
+  
+  def mod_list(forum)
+    return false unless logged_in? && forum
+    forum.moderators.collect { |mod| "<a href='#{user_path(mod)}'>#{mod.display_name}</a> " }
+  end
 
 end

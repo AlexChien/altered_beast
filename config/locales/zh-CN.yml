@@ -162,6 +162,15 @@
       beast_sidebar_title: "谁是Beast?"
       beast_sidebar_body: 这是一个使用Rails技术编写的小型、轻量级的论坛。这个名字有点吓人，我们正打算用500行代码来实现它。
       beast_welcome: 欢迎访问星尚论坛
+      
+      sites: 站点
+      new_site: 创建新站点
+      welcome_new_site: 欢迎创建新站点
+      site_title: 站点标题
+      site_description: 站点描述
+      site_tagline: 站点标语
+      site_host: 访问地址(主机名称)
+      save_site: 保持站点设置
 
       forum_title: 论坛
       forums_title: 论坛列表
@@ -181,8 +190,8 @@
       topic_posted_by: "{{title}} 由 {{user}} 在 {{date}} 创建"
       topic_replied_by: "{{title}} 由 {{user}} 在 {{date}} 回复"
       locked_topic: 此主题已锁定
-      monitoring_topic: 正在跟踪主题
-      monitor_topic: 跟踪主题
+      monitoring_topic: 正在收藏主题
+      monitor_topic: 收藏主题
       post_topic: 发布主题
       reply_to_topic: 回复主题
       save_reply: 发布回复
@@ -198,7 +207,7 @@
       author_title: 作者
       
       voices_title: 发言者
-      monitor_title: 跟踪者
+      monitor_title: 收藏者
       users_title: 会员
       recent_activity: 最近活跃的
       no_recent_activity: 最近低调的
@@ -268,7 +277,7 @@
       email_submit: 将此链接通过邮件发给我
       powered_by: Powered by
       and: 和
-      users_monitored_topics: "{{name}} 被跟踪的主题"
+      users_monitored_topics: "{{name}} 被收藏的主题"
       delete: 删除
       activation: 请访问下面的链接来激活你的帐户。
       without_http: 不要带 http://
@@ -290,6 +299,8 @@
       open_id_field_extended: "除了星尚通行证，您还可以输入其他的OpenID身份验证地址，如果您知道的话。如果您使用的身份验证地址支持 {{sreg}} 扩展，那您可以 {{login_link}} 并自动创建帐户"
       login_field: "用户名应该至少以2个字母开头，可以包含字母、数字以及下划线。"
       password_field: 请重复输入你要设置的密码。它必须至少包含5个字符。
+      open_id_field_extended: 如果您知道您的OpenID身份标识，请输入
+      openid_url_title: 身份标识地址（如：http://openid.enjoyoung.cn/my_login_name）
 
       formatting_help: 关于显示样式的帮助
       formatting_bold: "*粗体*"
@@ -337,7 +348,7 @@
       posts_feed_title: "{{search_posts_title}} | 星尚论坛"
 
       feed_language: zh-cn
-      posts_user_is_monitoring: " {{user}} 跟踪的帖子"
+      posts_user_is_monitoring: " {{user}} 收藏的帖子"
 
       view_all: 所有的
 

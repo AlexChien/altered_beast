@@ -1,28 +1,14 @@
 <h1><%= t(:'forum.login') %></h1>
 
-<% form_tag session_path do -%>
-<div id="password_fields"<%= %( style="display:none") unless cookies['use_open_id'].blank? %>>
+<% form_tag(session_path, :onsubmit => "LoginForm.checkOpenIDFormat();") do -%>
+
+<div id="openid_fields">
 <p>
-  <label for="login"><%= t(:'forum.login') %> or <%= link_to_function "login with OpenID", "LoginForm.setToOpenID()" %></label>
+  <label for="openid_url">使用星尚通行证登陆</label>
   <br />
-  <%= text_field_tag :login, @login %>
+  <%= text_field_tag 'openid_input', params[:openid_url], :class => "openid_input" %>
+  <input type="hidden" name="openid_url" value="" id="openid_url">	
   
-</p>
-
-  <%= hidden_field_tag :to, params[:to] if params[:to] %>
-
-<p>
-  <label for="password"><%= t(:'forum.password_title') %></label><br />
-  <%= password_field_tag :password %>
-</p>
-</div>
-
-<div id="openid_fields"<%= %( style="display:none") if cookies['use_open_id'].blank? %>>
-<p>
-  <label for="openid_url"><%= 'OpenID'[:open_id_directions] %>
-  or <%= link_to_function "login with your password", "LoginForm.setToPassword()" %></label>
-  <br />
-  <%= text_field_tag :openid_url, params[:openid_url] %>
 </p>
 </div>
 
@@ -44,4 +30,4 @@
 <%= submit_tag 'E-mail me the link'[:email_submit], :or => link_to_function('cancel'[], "$('reset-password').hide()") %></p>
 <% end -%>
 
-<%= javascript_tag "$('login').focus();"%>
+<%= javascript_tag "$('openid_input').focus();"%>

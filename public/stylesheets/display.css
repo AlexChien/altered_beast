@@ -4,6 +4,7 @@ body
 	padding:0;
 	background:#d7d7d7;
 	font-family:Arial, Helvetica, sans-serif;
+	font-size:100%;
 }
 
 a { color: #24b; }
@@ -18,7 +19,7 @@ a { color: #24b; }
 #content
 {
 	margin:1em 0;
-	width:70%;
+	width:95%;
 	background:white;
 	padding:25px;
 	border:5px solid #bbb;
@@ -457,7 +458,7 @@ p
 {
 	color:gold;
 	font-family:'Lucida Grande', Verdana, Arial, Helvetica, sans-serif;
-	font-size:0.7em;
+	font-size:0.75em;
 	float:left;
 	margin-left:2em;
 }
@@ -581,12 +582,10 @@ table tr td
 /* specific table styles */
 
 table.forums,
-table.topics
- { font-size:0.8em; }
-table.forums tr th { font-size:0.8em; }
-table.forums tr td .title {
-	font-size:1.4em; 
-	}
+table.topics { font-size:0.8em; }
+table.topics tr td.c2 { font-size:1.1em;}
+table.forums tr th { font-size:1em; }
+table.forums tr td .title {	font-size:1.4em; }
 
 table.forums tr td .desc {
 margin:0.5em 0;	
@@ -766,6 +765,7 @@ table.posts tr.spacer td
 	color:#333;
 	text-decoration:none;
 }
+.post .author span {margin-bottom:6px;}
 .post .author a.threadauthor
 {
 	color:#080;
@@ -902,7 +902,7 @@ div.editbox table td { border:0; }
 div.editbox a.utility
 {
   color: #f99;
-  font-size: 0.65em;
+  font-size: 0.75em;
   padding: 2px 5px 4px;
   display: block;
   font-family: 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif;
@@ -939,3 +939,8 @@ div.editbox ul.help {
 {
   color: #666;
 }
+
+div.forum_mod_list { font-size:12px; margin-bottom:5px;}
+
+tr.topic_over {}
+tr.topic_over td {background-color:#EEEEEE;}
