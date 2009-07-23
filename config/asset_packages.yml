@@ -1,0 +1,77 @@
+---
+javascripts:
+- eybbs:
+  - prototype
+  - effects
+  - lowpro
+  - time
+  - application
+# - base:
+# #  - jquery-1.3.1
+# #  - prototype
+#   - effects
+#   - dragdrop
+#   - controls
+#   - application
+#   - streamlined
+#   - window
+#   - overlib
+#   # - fckeditor/fckeditor
+#   - swfobject
+#   - jquery.validate
+#   - ui/ui.core
+#   - ui/ui.datepicker
+# - front:
+#   #- jquery
+#   - jquery-1.3.1
+#   #- jquery-ui
+#   - ui/ui.core
+#   - ui/ui.tabs
+#   - swfobject
+#   - thickbox
+#   - jquery.bgiframe.pack
+#   - jquery.ajaxQueue
+#   # - autocomplete/jquery.autocomplete.pack
+#   - autocomplete/jquery.autocomplete
+#   - jquery.validate
+#   - jrails
+#   - jquery.pngFix
+#   - uni-form.jquery
+#   - ey
+#   - richmedia
+stylesheets:
+- eybbs:
+  - display
+# - front:
+#   - reset
+#   - jquery/ui.core
+#   - jquery/ui.theme
+#   - jquery/ui.accordion
+#   - jquery/ui.datepicker
+#   - jquery/ui.dialog
+#   - jquery/ui.progressbar
+#   - jquery/ui.resizable
+#   - jquery/ui.slider
+#   - jquery/ui.tabs
+#   - thickbox
+#   - jquery.autocomplete
+#   - front
+#   - uni-form-generic
+#   - uni-form
+# - base:
+#   - default
+#   - thickbox
+# - admin:
+#   - mac_os_x
+#   - as_style
+#   - streamlined
+#   - menu
+#   - tabber
+#   - default
+#   - thickbox
+#   - admin
+# - dialog:
+#   - dialog
+# - autocomplete:
+#   - jquery.autocomplete
+#   - thickbox

@@ -39,7 +39,7 @@ set :rails_env, "production"
 # Your EC2 instances. Use the ec2-xxx....amazonaws.com hostname, not
 # any other name (in case you have your own DNS alias) or it won't
 # be able to resolve to the internal IP address.
-set :domain, "202.109.80.180"
+set :domain, "202.109.80.182"
 role :app, domain
 role :web, domain
 #role :product, "192.168.1.1"
@@ -57,8 +57,7 @@ namespace :deploy do
   desc "Generate database.yml and Create asset packages for production, minify and compress js and css files" 
   task :after_update_code, :roles => [:web] do
     database_yml
-    app_config
-    # asset_packager
+    asset_packager
   end
   
   # add soft link script for deploy
@@ -75,19 +74,13 @@ namespace :deploy do
   # customized tasks
   desc "Backup Mysql"
   task :backup_db, :roles => [:web] do
-  run "#{shared_path}/script/mysql_backup.pl openid_production:utf8 #{releases.last} "
+  run "#{shared_path}/script/mysql_backup.pl eybbs_production:utf8 #{releases.last} "
   end
  
   desc "Generate Production database.yml"
   task :database_yml, :roles => [:web] do
     db_config = "#{shared_path}/config/database.yml.production" 
     run "cp #{db_config} #{release_path}/config/database.yml"
-  end 
-  
-  desc "Generate app_config.yml"
-  task :app_config, :roles => [:web] do
-    app_config = "#{shared_path}/config/app_config.yml.production" 
-    run "cp #{app_config} #{release_path}/config/app_config.yml"
   end 
   
   desc "Create asset packages for production, minify and compress js and css files"
