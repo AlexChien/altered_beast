@@ -39,7 +39,7 @@ set :rails_env, "production"
 # Your EC2 instances. Use the ec2-xxx....amazonaws.com hostname, not
 # any other name (in case you have your own DNS alias) or it won't
 # be able to resolve to the internal IP address.
-set :domain, "202.109.80.182"
+set :domain, "202.109.80.180"
 role :app, domain
 role :web, domain
 #role :product, "192.168.1.1"
