@@ -64,7 +64,7 @@ namespace :deploy do
   desc "Symlink the upload directories"
   task :after_symlink, :roles => [:web] do
     ## create link for tmp
-    run "#{release_path}/script/relink.sh #{shared_path}/shared #{release_path}/tmp #{previous_release} #{release_name} tmp"
+    run "#{release_path}/script/relink.sh #{shared_path} #{release_path}/tmp #{previous_release} #{release_name} tmp"
     ## create link for mongrel cluster 
     
     backup_db
